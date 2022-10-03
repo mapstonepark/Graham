@@ -1,27 +1,27 @@
 const deleteBtn = document.querySelectorAll('.del')
-const todoItem = document.querySelectorAll('span.not')
-const todoComplete = document.querySelectorAll('span.completed')
+const contactsItem = document.querySelectorAll('span.not')
+const contactsComplete = document.querySelectorAll('span.completed')
 
 Array.from(deleteBtn).forEach((el)=>{
-    el.addEventListener('click', deleteTodo)
+    el.addEventListener('click', deletecontacts)
 })
 
-Array.from(todoItem).forEach((el)=>{
+Array.from(contactsItem).forEach((el)=>{
     el.addEventListener('click', markComplete)
 })
 
-Array.from(todoComplete).forEach((el)=>{
+Array.from(contactsComplete).forEach((el)=>{
     el.addEventListener('click', markIncomplete)
 })
 
-async function deleteTodo(){
-    const todoId = this.parentNode.dataset.id
+async function deletecontacts(){
+    const contactsId = this.parentNode.dataset.id
     try{
-        const response = await fetch('todos/deleteTodo', {
+        const response = await fetch('contactss/deletecontacts', {
             method: 'delete',
             headers: {'Content-type': 'application/json'},
             body: JSON.stringify({
-                'todoIdFromJSFile': todoId
+                'contactsIdFromJSFile': contactsId
             })
         })
         const data = await response.json()
@@ -33,13 +33,13 @@ async function deleteTodo(){
 }
 
 async function markComplete(){
-    const todoId = this.parentNode.dataset.id
+    const contactsId = this.parentNode.dataset.id
     try{
-        const response = await fetch('todos/markComplete', {
+        const response = await fetch('contactss/markComplete', {
             method: 'put',
             headers: {'Content-type': 'application/json'},
             body: JSON.stringify({
-                'todoIdFromJSFile': todoId
+                'contactsIdFromJSFile': contactsId
             })
         })
         const data = await response.json()
@@ -51,13 +51,13 @@ async function markComplete(){
 }
 
 async function markIncomplete(){
-    const todoId = this.parentNode.dataset.id
+    const contactsId = this.parentNode.dataset.id
     try{
-        const response = await fetch('todos/markIncomplete', {
+        const response = await fetch('contactss/markIncomplete', {
             method: 'put',
             headers: {'Content-type': 'application/json'},
             body: JSON.stringify({
-                'todoIdFromJSFile': todoId
+                'contactsIdFromJSFile': contactsId
             })
         })
         const data = await response.json()
