@@ -17,7 +17,7 @@ Array.from(contactsComplete).forEach((el)=>{
 async function deletecontacts(){
     const contactsId = this.parentNode.dataset.id
     try{
-        const response = await fetch('contactss/deletecontacts', {
+        const response = await fetch('contacts/deletecontacts', {
             method: 'delete',
             headers: {'Content-type': 'application/json'},
             body: JSON.stringify({
@@ -35,7 +35,7 @@ async function deletecontacts(){
 async function markComplete(){
     const contactsId = this.parentNode.dataset.id
     try{
-        const response = await fetch('contactss/markComplete', {
+        const response = await fetch('contacts/markComplete', {
             method: 'put',
             headers: {'Content-type': 'application/json'},
             body: JSON.stringify({
@@ -53,7 +53,7 @@ async function markComplete(){
 async function markIncomplete(){
     const contactsId = this.parentNode.dataset.id
     try{
-        const response = await fetch('contactss/markIncomplete', {
+        const response = await fetch('contacts/markIncomplete', {
             method: 'put',
             headers: {'Content-type': 'application/json'},
             body: JSON.stringify({

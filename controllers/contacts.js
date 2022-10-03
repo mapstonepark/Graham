@@ -1,20 +1,20 @@
-const Todo = require('../models/Contact')
+const Contact = require('../models/Contact')
 
 module.exports = {
     getcontacts: async (req,res)=>{
         console.log(req.user)
         try{
-            const todoItems = await Todo.find({userId:req.user.id})
-            const itemsLeft = await Todo.countDocuments({userId:req.user.id,completed: false})
-            res.render('contacts.ejs', {contacts: todoItems, left: itemsLeft, user: req.user})
+            const contactItems = await Contact.find({userId:req.user.id})
+            const itemsLeft = await Contact.countDocuments({userId:req.user.id,completed: false})
+            res.render('contacts.ejs', {contacts: contactItems, left: itemsLeft, user: req.user})
         }catch(err){
             console.log(err)
         }
     },
-    createTodo: async (req, res)=>{
+    createContact: async (req, res)=>{
         try{
-            await Todo.create({todo: req.body.todoItem, completed: false, userId: req.user.id})
-            console.log('Todo has been added!')
+            await Contact.create({contact: req.body.contactItem, completed: false, userId: req.user.id})
+            console.log('Contact has been added!')
             res.redirect('/contacts')
         }catch(err){
             console.log(err)
@@ -22,7 +22,7 @@ module.exports = {
     },
     markComplete: async (req, res)=>{
         try{
-            await Todo.findOneAndUpdate({_id:req.body.todoIdFromJSFile},{
+            await Contact.findOneAndUpdate({_id:req.body.contactIdFromJSFile},{
                 completed: true
             })
             console.log('Marked Complete')
@@ -33,7 +33,7 @@ module.exports = {
     },
     markIncomplete: async (req, res)=>{
         try{
-            await Todo.findOneAndUpdate({_id:req.body.todoIdFromJSFile},{
+            await Contact.findOneAndUpdate({_id:req.body.contactIdFromJSFile},{
                 completed: false
             })
             console.log('Marked Incomplete')
@@ -42,11 +42,11 @@ module.exports = {
             console.log(err)
         }
     },
-    deleteTodo: async (req, res)=>{
-        console.log(req.body.todoIdFromJSFile)
+    deleteContact: async (req, res)=>{
+        console.log(req.body.contactIdFromJSFile)
         try{
-            await Todo.findOneAndDelete({_id:req.body.todoIdFromJSFile})
-            console.log('Deleted Todo')
+            await Contact.findOneAndDelete({_id:req.body.contactIdFromJSFile})
+            console.log('Deleted Contact')
             res.json('Deleted It')
         }catch(err){
             console.log(err)
